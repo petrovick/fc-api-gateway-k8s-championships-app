@@ -4,6 +4,7 @@ metadata:
   name: {{ include "championships.fullname" . }}
   annotations:
     konghq.com/plugins: prometheus-championships
+    ingress.kubernetes.io/service-upstream: "true"
   labels:
     {{- include "championships.labels" . | nindent 4 }}
 spec:
