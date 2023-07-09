@@ -30,25 +30,25 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-# {{/*
-# Common labels
-# */}}
-# {{- define "championships.labels" -}}
-# helm.sh/chart: {{ include "championships.chart" . }}
-# {{ include "championships.selectorLabels" . }}
-# {{- if .Chart.AppVersion }}
-# app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-# {{- end }}
-# app.kubernetes.io/managed-by: {{ .Release.Service }}
-# {{- end }}
+{{/*
+Common labels
+*/}}
+{{- define "championships.labels" -}}
+helm.sh/chart: {{ include "championships.chart" . }}
+{{ include "championships.selectorLabels" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- end }}
 
 {{/*
 Selector labels
 */}}
-# {{- define "championships.selectorLabels" -}}
-# app.kubernetes.io/name: {{ include "championships.name" . }}
-# app.kubernetes.io/instance: {{ .Release.Name }}
-# {{- end }}
+{{- define "championships.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "championships.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
 
 {{/*
 Create the name of the service account to use
