@@ -3,11 +3,8 @@ kind: Deployment
 metadata:
   name: {{ include "championships.fullname" . }}
   labels:
-    app.kubernetes.io/instance: championships
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: championships
-    app.kubernetes.io/version: 1.16.0
-    helm.sh/chart: championships-0.1.0
+    app: championships
+    version: v1
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
