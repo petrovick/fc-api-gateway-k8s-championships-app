@@ -3,14 +3,20 @@ kind: Deployment
 metadata:
   name: {{ include "championships.fullname" . }}
   labels:
-    {{- include "championships.labels" . | nindent 4 }}
+    app.kubernetes.io/instance: championships
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: championships
+    app.kubernetes.io/version: 1.16.0
+    # {{- include "championships.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "championships.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/instance: championships
+      app.kubernetes.io/name: championships
+      # {{- include "championships.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
